@@ -6,8 +6,8 @@ export const SAMPLE_DATA = {
       category: "Torturi",
       description: "Tort cu ciocolata",
       images: [
-        "/images/p1-1.jfif",
-        "/images/p1-2.jfif",
+        "/images/p1-1.jpg",
+        "/images/p1-2.jpg",
       ],
       price: "100",
       rating: "4.5",
@@ -22,8 +22,8 @@ export const SAMPLE_DATA = {
       category: "Prajituri",
       description: "Prajitura cu frisca",
       images: [
-        "/images/p2-1.jfif",
-        "/images/p2-2.jfif",
+        "/images/p2-1.jpg",
+        "/images/p2-2.jpg",
       ],
       price: "120",
       rating: "4.5",
