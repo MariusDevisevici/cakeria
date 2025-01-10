@@ -2,15 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SIGN_IN_DEFAULT_VALUES } from "@/lib/constants";
+import { REGISTER_DEFAULT_VALUES } from "@/lib/constants";
 import Link from "next/link";
-import { signInWithCredentials } from "@/lib/actions/user.actions";
+import { registerUser } from "@/lib/actions/user.actions";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { useSearchParams } from "next/navigation";
 
-const SignInForm = () => {
-  const [data, action] = useActionState(signInWithCredentials, {
+const RegisterForm = () => {
+  const [data, action] = useActionState(registerUser, {
     success: false,
     message: "",
   });
@@ -18,12 +18,12 @@ const SignInForm = () => {
   const searchParams = useSearchParams();
   const callBackUrl = searchParams.get("callbackUrl") || "/";
 
-  const SignInButton = () => {
+  const RegisterButton = () => {
     const { pending } = useFormStatus();
 
     return (
       <Button disabled={pending} className="w-full" variant={"default"}>
-        {pending ? "Signing In..." : "Sign In"}
+        {pending ? "Submitting..." : "Register"}
       </Button>
     );
   };
@@ -33,6 +33,17 @@ const SignInForm = () => {
       <input type="hidden" name="callBackUrl" value={callBackUrl} />
       <div className="space-y-6">
         <div>
+          <Label htmlFor="name">Name</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            defaultValue={REGISTER_DEFAULT_VALUES.name}
+          />
+        </div>
+        <div>
           <Label htmlFor="email"> Email</Label>
           <Input
             id="email"
@@ -40,7 +51,7 @@ const SignInForm = () => {
             type="email"
             required
             autoComplete="email"
-            defaultValue={SIGN_IN_DEFAULT_VALUES.email}
+            defaultValue={REGISTER_DEFAULT_VALUES.email}
           />
         </div>
         <div>
@@ -51,19 +62,30 @@ const SignInForm = () => {
             type="password"
             required
             autoComplete="password"
-            defaultValue={SIGN_IN_DEFAULT_VALUES.password}
+            defaultValue={REGISTER_DEFAULT_VALUES.password}
           />
         </div>
         <div>
-          <SignInButton />
+          <Label htmlFor="confirmPassword">Confirm Password</Label>
+          <Input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+            autoComplete="confirmPassword"
+            defaultValue={REGISTER_DEFAULT_VALUES.confirmPassword}
+          />
+        </div>
+        <div>
+          <RegisterButton />
         </div>
         {data && !data.success && (
           <div className="text-center text-destructive">{data.message}</div>
         )}
         <div className="text-sm text-center text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link href="/register" target="_self" className="link">
-            Register
+          Already have an account?{" "}
+          <Link href="/sign-in" target="_self" className="link">
+            Sign In
           </Link>
         </div>
       </div>
@@ -71,4 +93,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default RegisterForm;
