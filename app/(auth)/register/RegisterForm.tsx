@@ -84,7 +84,7 @@ const RegisterForm = () => {
         )}
         <div className="text-sm text-center text-muted-foreground">
           Already have an account?{" "}
-          <Link href="/sign-in" target="_self" className="link">
+          <Link href="/sign-in" target="_self" className="underline">
             Sign In
           </Link>
         </div>
