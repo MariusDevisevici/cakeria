@@ -1,3 +1,4 @@
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient } from '@prisma/client';
@@ -30,3 +31,6 @@ export const prisma = new PrismaClient({ adapter }).$extends({
     },
   },
 });
+
+export const { user, cart } = prisma;
+export const authAdapter = PrismaAdapter(prisma);
